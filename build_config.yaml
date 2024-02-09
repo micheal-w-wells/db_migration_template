@@ -1,0 +1,30 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: db_migrator_build
+spec:
+  source:
+    type: Git
+    git:
+      uri: "https://github.com/your/repository.git"
+      ref: "main"  # or specify the branch or tag you want to use
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: path/to/your/Dockerfile
+    env:
+      - name: NODE_ENV
+        value: "production"
+      - name: POSTGRES_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: your-secret-name
+            key: secret-key
+  output:
+    to:
+      kind: ImageStreamTag
+      name: "db_migration_image_stream:latest"
+  triggers:
+      - type: GitHub
+        github:
+          secret: your-github-webhook-secret
