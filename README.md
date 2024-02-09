@@ -14,8 +14,8 @@ To use:
 
 Flow is like this:
 
-On your local, in the knex folder, run npx migrate:make migration_name
-change the functions to async and add in await knex.raw (look at the examples)
+On your local, in the knex folder, run npx migrate:make migration_name .
+Then change the functions to async and add in await knex.raw (look at the examples).
 
 Flow looks like this:
 
